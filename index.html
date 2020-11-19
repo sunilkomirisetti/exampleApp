@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+
+  <title>Automation_Util</title>
+  <!-- Custom styles for this template-->
+  <link href="css/style.css" rel="stylesheet">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body >
+    <div id="content">
+      <div class="formBox login">
+        <div class="formBoxHeader">Login</div>
+        <br /> <br />
+        <div align="center">
+            <img src="../img/logo.svg" style="width:15%;">
+        </div>
+        <form class="formBoxBody">
+          <div class="formData">
+            <label class="label">Username</label>
+            <input type="email" class="form-control" id="emailAddress" placeholder="Email">
+          </div>
+          <div class="formData">
+            <label class="label">Password</label>
+            <input type="password" class="form-control" id="password" placeholder="Password" >
+          </div>
+          <div class="formData">
+            <input type="button" class="formBtn" onclick="login()"  value="Sign In">
+          </div>
+          <div class="formData">
+            <p><a class="link" href="#/forgotPassword">Forgot password?</a></p>
+          </div>
+        </form>
+        <div id="errMsg" class="error-message" align="center"></div>        
+      </div>
+    </div>
+    <div id="updatePwd" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+          <div class="modal-content">
+              <div class="modal-body">
+                <div>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h5 class="modal-title">Update Password</h5> <br/>
+                </div>
+                <div class="input-group">
+                  <span class="input-group-addon" id="sizing-addon2"><span class="glyphicon glyphicon-lock"></span></span>
+                  <input type="password" class="form-control" id="newPwd" placeholder="Password" aria-describedby="sizing-addon2">
+                </div><br/>
+              <div class="input-group">
+                <span class="input-group-addon" id="sizing-addon2"><span class="glyphicon glyphicon-lock"></span></span>
+                <input type="password" class="form-control" id="confirmPwd" placeholder="Confirm Password" aria-describedby="sizing-addon2">
+                <br>
+              </div>
+              <span id="message"></span>
+          <br/>
+          <button class="cancelButton" onclick="cancel()">Cancel</button>
+           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+           <button onclick="changePwd()" class="submitButton" id="changePwd" disabled="true">Update Password</button>
+        </div>
+      </div>
+    </div>
+    </div>
+   
+  <script src="js/jquery.min.js"></script>
+  <script src="js/jquerysession.js"></script>
+  <script src="js/jquery.blockUI.js"></script>
+  <script src="js/spin.min.js"></script>
+  <script src="js/underscore-min.js"></script>
+  <script src="js/reqHandler.js"></script>
+  <script src="js/services.js"></script>
+  <script src="js/routes.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+      $('#password').keypress(function(e) {
+          if(e.which == 13) {
+              login();
+          }
+      });
+    </script>
+  </body>
+
+</html>

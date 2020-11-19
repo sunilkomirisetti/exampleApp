@@ -1,0 +1,96 @@
+html, body {
+  background-color: #f2f3f3;
+  height: 100%;
+  overflow: hidden;
+}
+body {
+  background: #f2f3f3 url("../img/bgImg1.jpg")  no-repeat fixed center;
+  background-size: 100% auto;
+}
+.message-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.error-message {
+  align-self: flex-end;
+  color: red;
+  font-weight: 700;
+}
+/*errMsg*/
+#content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+.formBox {
+  width: 30%;
+  background: #d9f3fd61;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.4);
+}
+.formBox .formBoxHeader {
+  padding: 10px;
+  text-align: center;
+  background: #3073b9;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+}
+.formBox .formBoxBody {
+  padding: 20px;
+  background-color: #d9f3fd61;
+}
+.formBox .formBoxBody .formData {
+  margin-bottom: 11px;
+}
+.formBox .formBoxBody .formData .label {
+  padding: 0;
+  text-align: left;
+  text-shadow: 1px .3px #c9cacc;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.formBox .formBoxBody .formData .formBtn {
+  background: #3073b9;
+  color: #fff;
+  font-weight: bold;
+  border: none;
+  margin: 20px auto 0;
+  display: block;
+  height: 38px;
+  border-radius: 4px;
+  margin-bottom: 14px;
+  text-align: center;
+}
+
+.formBox .formBoxBody .formData input {
+  height: 30px;
+  width: 100%;
+  padding: 4px;
+}
+
+body input, body a, body a:active {
+  outline: 0;
+}
+
+.link {
+  color: #818186;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.watermark{
+  background-position: 50% 50%; 
+  z-index: 999999; 
+  margin-left: 35%; 
+  margin-top: 0%; 
+  opacity: 0.1;
+  display: block;
+}
+

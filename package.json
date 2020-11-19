@@ -1,0 +1,34 @@
+{
+  "name": "Automation_Util",
+  "version": "1.0.0",
+  "description": "Automation_Util",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cookie-parser": "^1.4.3",
+    "ejs-locals": "^1.0.2",
+    "errorhandler": "^1.5.0",
+    "exceljs": "^4.2.0",
+    "express": "^4.16.4",
+    "express-session": "^1.16.1",
+    "mongoose": "^5.4.10",
+    "mongoose-unique-validator": "^2.0.2",
+    "morgan": "^1.9.1",
+    "multer": "^1.4.2",
+    "nconf": "^0.10.0",
+    "node-cron": "^2.0.3",
+    "nodemailer": "^6.2.1",
+    "nodemailer-smtp-transport": "^2.7.4",
+    "nodemon": "^1.19.1",
+    "path": "^0.12.7",
+    "puppeteer": "^5.4.1",
+    "request": "^2.88.2",
+    "request-promise-native": "^1.0.9",
+    "underscore": "^1.9.1",
+    "url": "^0.11.0",
+    "validator": "^10.11.0"
+  },
+  "devDependencies": {}
+}
