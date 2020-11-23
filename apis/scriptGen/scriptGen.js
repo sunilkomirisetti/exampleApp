@@ -98,3 +98,5 @@ function runScript(configObj, callback) {
     
   })();
 }
+
+module.exports.runScript = runScript;
