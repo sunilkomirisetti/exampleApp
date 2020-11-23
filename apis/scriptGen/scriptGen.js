@@ -2,11 +2,13 @@ const puppeteer = require('puppeteer');
 const request_client = require('request-promise-native');
 const _ = require('underscore');
 
-async function runScript(configObj, callback) {
+function runScript(configObj, callback) {
   const result = [];
   console.log('lets begin the action ::: ');
+
+  (async() => {
   const browser = await puppeteer.launch({headless: false});
-  let page = await browser.newPage();
+  const page = await browser.newPage();
     
   await page.setRequestInterception(true);
   await page.setDefaultNavigationTimeout(0);
@@ -37,79 +39,62 @@ async function runScript(configObj, callback) {
     });
   }); 
 
-  (async() => {
+  //(async() => {
     let pageObjects = _.sortBy(configObj.pageObjects, 'pageIndex');
     let lastIndex = pageObjects.length;
-    console.log('pageObjects sorted :: ', lastIndex)
-    for (i=0; i<lastIndex; i++) {
-      let pageObj = pageObjects[i];
-      console.log('going to :: ' + pageObj.pageURL);
-      await page.goto(pageObj.pageURL);
-      page.waitForNavigation();
-       page.$eval('#quote-main-zip-btn', elem => elem.click());
-      let formData = pageObj.formData;
-      if (formData && formData.length) {
+    console.log('pageObjects sorted :: ', lastIndex);
 
+    let pageObj = pageObjects[0];
+    console.log('going to :: ' + pageObj.pageURL);
+    await page.goto(pageObj.pageURL);
+    page.waitForNavigation();
+    await page.bringToFront();
+    let formData = pageObj.formData;
+    let formDataIndex = formData.length || 0;
+    formData.forEach(function(obj) {
+      console.log(formDataIndex, obj.key, obj.value);
+      if ('dropdown' == obj.type) {
         (async() => {
-          formData.forEach(function(obj) {
-            if ('dropdown' == obj.type) {
-               page.select('#' + obj.key, obj.value);
-            } else if ('input' == obj.type) {
-               page.type('#' + obj.key, obj.value);
+         page.select('#' + obj.key, obj.value);
+         formDataIndex = formDataIndex - 1;
+         if (formDataIndex <= 0) {
+          console.log('before click ::', '#' + pageObj.actionEventId);
+            if ('Submit' == pageObj.pageAction) {
+                  //await Promise.all([await page.click('#' + pageObj.actionEventId)]);
+                  await page.keyboard.press('Enter');
+                
             }
-          });
-          if ('Submit' == pageObj.pageAction) {
-              console.log('in SUBMIT :: ');
-              //page.$eval('#quote-main-zip-btn', elem => elem.click());
-              if (pageObj.actionEventType && 'selector' == pageObj.actionEventType) {
-                  Promise.all([ page.click('#' + pageObj.actionEventId)]);
-                  callback({
-                    status: 'SUCCESS',
-                    result: result
-                  });
-              } else {
-                console.log('in else :: ');
-                 page.click('#' + pageObj.actionEventId);
-                 /*page.click('#quote-main-zip-btn');
-                 page.keyboard.press('Enter');
-                 page.type('#quote-main-zip-code-input',String.fromCharCode(13));*/
-                 //page.$eval('#quote-main-zip-btn', elem => elem.click());
-                 console.log('after click');
-                 page.waitForNavigation();
-                callback({
-                  status: 'SUCCESS',
-                  result: result
-                });
-              }
-          }
+         }
+         })();
+      } else {
+        (async() => {
+        await page.type('#' + obj.key, obj.value);
+         formDataIndex = formDataIndex - 1;
+         if (formDataIndex <= 0) {
+            console.log('before click ::', '#' + pageObj.actionEventId);
+            if ('Submit' == pageObj.pageAction) {
+                  //await Promise.all([await page.click('#' + pageObj.actionEventId)]);
+                  await page.keyboard.press('Enter');
+                  page.waitForNavigation();
+                
+            }
+          //page.click('#quote-main-zip-btn');
+          
+          /*Promise.all([ page.click('#' + pageObj.actionEventId)]);
+          page.$eval('#' + pageObj.actionEventId, elem => elem.click());
+          page.click('#' + pageObj.actionEventId);*/
+       
+        }
         })();
       }
-    }
+    });
+    
     //page.click('#quote-main-zip-btn');
-    console.log('this will print last');
+    //console.log('this will print last');
+    callback({
+      status: 'SUCCESS',
+      result: result
+    });
+    
   })();
 }
-
-async function setFormData(formData, page, callback) {
-  let lastIndex = formData.length;
-  formData.forEach(function(obj) {
-    if ('dropdown' == obj.type) {
-       page.select('#' + obj.key, obj.value);
-       lastIndex = lastIndex - 1;
-       if (lastIndex <= 0) {
-        page.keyboard.press('Enter');
-        callback({'status': 'completed'})
-       }
-    } else if ('input' == obj.type) {
-       page.type('#' + obj.key, obj.value);
-       lastIndex = lastIndex - 1;
-       if (lastIndex <= 0) {
-        page.keyboard.press('Enter');
-        callback({'status': 'completed'})
-       }
-    }
-  });
-}
-
-
-module.exports.runScript = runScript;
