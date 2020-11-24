@@ -44,58 +44,47 @@ function runScript(configObj, callback) {
     let lastIndex = pageObjects.length;
     console.log('pageObjects sorted :: ', lastIndex);
 
-    let pageObj = pageObjects[0];
-    console.log('going to :: ' + pageObj.pageURL);
-    await page.goto(pageObj.pageURL);
-    page.waitForNavigation();
-    await page.bringToFront();
-    let formData = pageObj.formData;
-    let formDataIndex = formData.length || 0;
-    formData.forEach(function(obj) {
-      console.log(formDataIndex, obj.key, obj.value);
-      if ('dropdown' == obj.type) {
-        (async() => {
-         page.select('#' + obj.key, obj.value);
-         formDataIndex = formDataIndex - 1;
-         if (formDataIndex <= 0) {
-          console.log('before click ::', '#' + pageObj.actionEventId);
-            if ('Submit' == pageObj.pageAction) {
-                  //await Promise.all([await page.click('#' + pageObj.actionEventId)]);
-                  await page.keyboard.press('Enter');
-                
-            }
-         }
-         })();
-      } else {
-        (async() => {
-        await page.type('#' + obj.key, obj.value);
-         formDataIndex = formDataIndex - 1;
-         if (formDataIndex <= 0) {
+    for (i=0; i<lastIndex; i++) {
+      let pageObj = pageObjects[i];
+      console.log('going to :: ' + pageObj.pageURL);
+      await page.goto(pageObj.pageURL);
+      page.waitForNavigation();
+      await page.bringToFront();
+      let formData = pageObj.formData || [];
+      let formDataIndex = formData.length;
+      formData.forEach(function(obj) {
+        console.log(formDataIndex, obj.key, obj.value);
+        if ('dropdown' == obj.type) {
+          (async() => {
+           page.select('#' + obj.key, obj.value);
+           formDataIndex = formDataIndex - 1;
+           if (formDataIndex <= 0) {
             console.log('before click ::', '#' + pageObj.actionEventId);
-            if ('Submit' == pageObj.pageAction) {
-                  //await Promise.all([await page.click('#' + pageObj.actionEventId)]);
-                  await page.keyboard.press('Enter');
-                  page.waitForNavigation();
-                
-            }
-          //page.click('#quote-main-zip-btn');
-          
-          /*Promise.all([ page.click('#' + pageObj.actionEventId)]);
-          page.$eval('#' + pageObj.actionEventId, elem => elem.click());
-          page.click('#' + pageObj.actionEventId);*/
-       
+              if ('Submit' == pageObj.pageAction) {
+                await page.keyboard.press('Enter');
+                page.waitForNavigation();             
+              }
+           }
+           })();
+        } else {
+          (async() => {
+          await page.type('#' + obj.key, obj.value);
+           formDataIndex = formDataIndex - 1;
+           if (formDataIndex <= 0) {
+              console.log('before click ::', '#' + pageObj.actionEventId);
+              if ('Submit' == pageObj.pageAction) {
+                    await page.keyboard.press('Enter');
+                    page.waitForNavigation();                
+              }       
+          }
+          })();
         }
-        })();
-      }
-    });
-    
-    //page.click('#quote-main-zip-btn');
-    //console.log('this will print last');
+      });
+    }
     callback({
       status: 'SUCCESS',
       result: result
     });
-    
   })();
 }
 
