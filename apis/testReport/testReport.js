@@ -99,7 +99,8 @@ function createAndRunScript(configId, callback) {
 						result.forEach(function(obj) {
 							let index = 1;
 							let queryParams = obj.queryParams;
-							if (obj.queryParams) {
+							console.log('before param check :: ', Object.keys(obj.queryParams).length)
+							if (queryParams && Object.keys(obj.queryParams).length) {
 								let lastQueryParamIndex = Object.keys(obj.queryParams).length;
 								console.log('lastQueryParamIndex :: ', lastQueryParamIndex);
 								(async() => {
@@ -109,6 +110,54 @@ function createAndRunScript(configId, callback) {
 										  index = index + 1;
 										  currentRow = currentRow + 1;
 										  lastQueryParamIndex = lastQueryParamIndex - 1;
+										  if (1 == Object.keys(obj.queryParams).length) {
+			  								  		try {
+			  								  			worksheet.mergeCells(startRow, 1, currentRow, 1);
+			  								  			worksheet.mergeCells(startRow, 2, currentRow, 2);
+			  								  			worksheet.mergeCells(startRow, 3, currentRow, 3);
+			  								  			worksheet.mergeCells(startRow, 4, currentRow, 4);
+			  								  			worksheet.mergeCells(startRow, 5, currentRow, 5);
+			  								  			worksheet.mergeCells(startRow, 7, currentRow, 7);
+			  								  			worksheet.mergeCells(startRow, 8, currentRow, 8);
+			  								  			worksheet.mergeCells(startRow, 9, currentRow, 9);
+			  								  			startRow = startRow + index - 1;
+			  								  		} catch(e) {console.log('error happening while merging :: ', startRow, currentRow);}
+			  	  								    lastIndex = lastIndex - 1;
+			  	  								    console.log('lastIndex :: ' + lastIndex);
+			  	  								    if (lastIndex <= 0) {
+			  	  								    	let rowIndex = 1;
+			  	  								    	let previosCell = '';
+			  	  								    	for (rowIndex; rowIndex <= worksheet.rowCount; rowIndex++) {
+			  	  								    	    worksheet.getRow(rowIndex).alignment = { vertical: 'middle', horizontal: 'center', wrapText: true };
+			  	  								    	    let cellValue = worksheet.getRow(rowIndex).getCell(1).value;
+			  	  								    	    if (previosCell != cellValue) {
+			  	  								    	      worksheet.getRow(rowIndex).border = {top: {style:'thick'}, left: {style:'thin'}, bottom: {style:'thin'}, right: {style:'thin'}};
+			  	  								    	      previosCell = cellValue;
+			  	  								    	    } else if (rowIndex ==  worksheet.rowCount) {
+			  	  								    	      worksheet.getRow(rowIndex + 1).border = {top: {style:'thick'}, left: {style:'thin'}, bottom: {style:'thin'}, right: {style:'thin'}};
+			  	  								    	    } else {
+			  	  								    	      worksheet.getRow(rowIndex).border = {top: {style:'thin'}, left: {style:'thin'}, bottom: {style:'thin'}, right: {style:'thin'}};
+			  	  								    	    }
+			  	  								    	    
+			  	  								    	}
+			  	  		    	        		       	workbook.xlsx.writeFile(fileName)
+			  	  		    	        		         .then(() => {
+			  	  		    	   			        	  	callback({
+			  	  		    	     								fileName: fileName,
+			  	  		    	     								filePath: fileName
+			  	  		    	     							});
+			  	  		    	        		           return;
+			  	  		    	        		       	}).catch(error => {
+			  	  		    								console.log('before sending response :: EXCEPTION', error);              
+			  	  		    				        	  	callback({
+			  	  		    	  								fileName: fileName,
+			  	  		    	  								filePath: fileName
+			  	  		    	  							});
+			  	  		    	  							return;
+			  	  		    							});
+			  	  		    	        		       	return;
+			  	  								    }
+										  }
 										} else {
 										  worksheet.addRow({'sNo': '', 'requestUrl': '', 'requestType': '', 'requestHeaders':  '', 'requestPostData': '', 'requestQueryParams': param + ' : ' + queryParams[param], 'responseHeaders': '', 'responseSize': '', responseBody: ''});
 										  currentRow = currentRow + 1;
@@ -124,6 +173,7 @@ function createAndRunScript(configId, callback) {
 										  			worksheet.mergeCells(startRow, 5, currentRow, 5);
 										  			worksheet.mergeCells(startRow, 7, currentRow, 7);
 										  			worksheet.mergeCells(startRow, 8, currentRow, 8);
+										  			worksheet.mergeCells(startRow, 9, currentRow, 9);
 										  			startRow = startRow + index - 1;
 										  		} catch(e) {console.log('error happening while merging :: ', startRow, currentRow);}
 			  								    lastIndex = lastIndex - 1;
@@ -188,6 +238,7 @@ function createAndRunScript(configId, callback) {
   							  		worksheet.mergeCells(startRow, 5, currentRow, 5);
   							  		worksheet.mergeCells(startRow, 7, currentRow, 7);
   							  		worksheet.mergeCells(startRow, 8, currentRow, 8);
+  							  		worksheet.mergeCells(startRow, 9, currentRow, 9);
   							  		startRow = startRow + index - 1;
   							  	} catch(e) {console.log('error happening while merging :: ', startRow, currentRow);}
 							  	startRow = startRow + index - 1;
@@ -227,8 +278,9 @@ function createAndRunScript(configId, callback) {
 		  	        		       	return;
 							    }
 							} else {
-								worksheet.addRow({'sNo': counter ++, 'requestUrl': obj.requestUrl, 'requestType': obj.requestType, 'requestHeaders':  JSON.stringify(obj.requestHeaders, null, 2), 'requestPostData': JSON.stringify(obj.requestPostData, null, 2), 'requestQueryParams': JSON.stringify(obj.queryParams, null, 2), 'responseHeaders': JSON.stringify(obj.responseHeaders, null, 2), 'responseSize': obj.responseSize, 'responseBody': JSON.stringify(obj.responseBody, null, 2)});
-							    startRow = startRow + index - 1;
+								worksheet.addRow({'sNo': counter ++, 'requestUrl': obj.requestUrl, 'requestType': obj.requestType, 'requestHeaders':  JSON.stringify(obj.requestHeaders, null, 2), 'requestPostData': '', 'requestQueryParams': '', 'responseHeaders': JSON.stringify(obj.responseHeaders, null, 2), 'responseSize': obj.responseSize, 'responseBody': JSON.stringify(obj.responseBody, null, 2)});
+							    startRow = startRow + 1;
+							    currentRow = currentRow + 1;
     						    lastIndex = lastIndex - 1;
     						    if (lastIndex <= 0) {
     						    	let rowIndex = 1;
