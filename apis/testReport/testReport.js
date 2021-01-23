@@ -1,6 +1,5 @@
 const fs = require('fs');
 
-
 module.exports = function(app) {    
     app.get('/testReport/:configId', async function(req, res) {
 		try {
