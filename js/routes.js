@@ -8,6 +8,7 @@ Path.map("#/dashboard").to(function () {
 });
 
 Path.map("#/config").to(function () {
+	callConfigAPI();
     $('#content').load('views/config.html');
 });
 
