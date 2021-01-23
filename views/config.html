@@ -1,1 +1,61 @@
-<h1>Config</h1>
+
+<div class="container">
+	<div class="container-fluid">
+	   <div class="card shadow mb-4" >
+	     <div class="card-header py-3">
+	       <h6 class="m-0 font-weight-bold text-primary">Configurations
+	         <button class="btn btn-primary" style="margin-left: 75%;"data-toggle="modal" data-target="#modal-add-config" >Add Config</button>
+	       </h6>
+	     </div>
+	     <div class="card-body">
+	         <table id="configTable" class="table table-striped table-bordered" style="width:50%; height: 80%;"></table>
+	     </div>
+	   </div>
+ </div>
+</div>
+
+ <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="modal-add-config"> 
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+         <div class="modal-header">
+           <h5 class="modal-title" id="exampleModalLongTitle">Add Config</h5>
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+           </button>
+         </div>
+         <div class="modal-body">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="input-group">
+                <span class="input-group-prepend">
+                    <div class="input-group-text bg-transparent border-right-0"><i class="fa fa-user"></i></div>
+                </span>
+                <select class="form-control" id="agentName"></select>
+              </div>
+            </div>
+          </div>
+          <br/>
+          <div class="row">
+           <div class="col-md-12">
+               <div class="input-group">
+                   <span class="input-group-prepend">
+                       <div class="input-group-text bg-transparent border-right-0"><i class="fa fa-address-card"></i></div>
+                   </span>
+                   <select class="form-control" id="configStatus">
+                       <option selected value="">Status</option>
+                       <option value="Active">Active</option>
+                       <option value="Inactive">Inactive</option>
+                   </select>
+               </div>
+           </div>
+          </div>
+            
+          </div>
+
+         <div class="modal-footer">
+           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+           <button type="button" class="btn btn-primary" onclick="addConfig()">Create</button>
+         </div>
+       </div>
+  </div>
+</div>
