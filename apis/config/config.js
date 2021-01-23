@@ -18,6 +18,15 @@ module.exports = function(app) {
 			res.json(e);
 		}
 	});
+	app.get('/ui/query/config', function(req, res) {
+		try {
+			getList(req.query, function(response) {
+				res.json(response);
+			});
+		} catch(e) {
+			res.json(e);
+		}
+	});
 }
 
 const mongoose = require('mongoose'),
@@ -93,13 +102,13 @@ function create(config, callback) {
 					};
 				errorList.push(e);
     		}
-    		if (!pageObject.pageURL) {
+    		/*if (!pageObject.pageURL) {
 				let e = {
 						status: VALIDATE.FAIL,
 						error: utils.formatText(VALIDATE.REQUIRED, 'pageURL')
 					};
 				errorList.push(e);
-    		}
+    		}*/
     		if (!pageObject.pageIndex) {
 				let e = {
 						status: VALIDATE.FAIL,
@@ -142,6 +151,27 @@ function create(config, callback) {
 
 function getDetails(configId, callback) {
 	ConfigModel.find({'configId': configId}, function(error, configRecords) {
+		if (error) {
+			callback({
+				status: DB_CODES.FAIL,
+				error: error
+			});
+			return;
+		} else {
+			configRecords = configRecords.map(function(configRecord) {
+				return new ConfigController.ConfigAPI(configRecord);
+			});
+			callback({
+				status: REQUEST_CODES.SUCCESS,
+				result: configRecords
+			});
+			return;
+		}
+	});
+}
+
+function getList(query, callback) {
+	ConfigModel.find(query, function(error, configRecords) {
 		if (error) {
 			callback({
 				status: DB_CODES.FAIL,
