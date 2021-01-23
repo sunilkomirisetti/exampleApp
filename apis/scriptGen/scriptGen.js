@@ -33,7 +33,6 @@ function scriptLauncher(configObj) {
   });
 }
 
-
 async function pageGraber(page, pageObj) {
   await page.on('response', async response => {
     let request = response.request();
@@ -91,13 +90,14 @@ async function pageGraber(page, pageObj) {
       await page.click(pageObj.actionEventSelector);
       await page.waitForNavigation({waitUntil: ['load', 'domcontentloaded', 'networkidle0', 'networkidle2']});
     } else if (pageObj.actionEventId) { 
-      page.bringToFront();     
-      await page.$eval('#'+pageObj.actionEventId, element => element.click());
+      await page.click('#' + pageObj.actionEventId);
+      await page.keyboard.press('Enter');
+      /*await page.$eval('#'+pageObj.actionEventId, element => element.click());
       await page.click('[id="'+pageObj.actionEventId+'"]');
       await page.keyboard.press("Tab");
       await page.keyboard.press("Enter");
       console.log('SUBMITTED ::: ');
-      page.waitForNavigation({waitUntil: ['load', 'domcontentloaded', 'networkidle0', 'networkidle2']});
+      page.waitForNavigation({waitUntil: ['load', 'domcontentloaded', 'networkidle0', 'networkidle2']});*/
     } else {
       await page.keyboard.press('Enter');
       await page.waitForNavigation({waitUntil: ['load', 'domcontentloaded', 'networkidle0', 'networkidle2']});
@@ -105,7 +105,6 @@ async function pageGraber(page, pageObj) {
   }
   console.log('PAGE pageGraber DONE :: ');
 }
-
 
 async function formFiller(page, obj) {
   page.waitForSelector('#' + obj.key);
