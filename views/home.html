@@ -9,7 +9,7 @@
     <!-- Bootstrap 3.3.5 -->
     <link href="css/style.css" rel="stylesheet">
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/datatables.min.css" rel="stylesheet">
+    <link href="css/dataTables.bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     
@@ -63,12 +63,14 @@
     <script src="js/services.js"></script>
     <script src="js/routes.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/datatables.min.js"></script>
+    <!-- <script src="js/datatables.min.js"></script> -->
+    <script src="js/jquery.dataTables.min.js"></script>
+    <!-- <script src="js/dataTables.bootstrap.min.js"></script> -->
 
 
     <script type="text/javascript">          
       $( document ).ready(function() {
-          document.title = "SSR CP - "+$.session.get("userName");
+          document.title = "StateFarm - AutoUtil - "+$.session.get("userName");
       });
     </script>
   </body>
