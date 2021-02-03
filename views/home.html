@@ -6,48 +6,49 @@
     <link rel="icon" type="image/png" href="/favicon.png" />
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <!-- Bootstrap 3.3.5 -->
-    <link href="css/style.css" rel="stylesheet">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/dataTables.bootstrap.min.css" rel="stylesheet">
+    
+    <link href="css/style.css" rel="stylesheet">    
+      
+    <!-- Bootstrap 3.5.1 -->
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <!-- Datatables css -->
+    <link href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" rel="stylesheet">
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-    
-      <!--Path Js -->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/path.js/0.8.4/path.min.js"></script>
 
     <script src="http://underscorejs.org/underscore-min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/path.js/0.8.4/path.min.js"></script>
   </head>
   <body style=" background: #f2f3f3 !important;">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <img src="../img/logo.svg" >
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav">
-          <li class="nav-item active">
-            <a class="nav-link" href="#/dashboard">Dashboard <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#/config">Config</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#/reports">Test Reports</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Dropdown link
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
+
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#"><img src="../img/logo.svg" ></a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li id="dashboardMenu"><a href="#/dashboard">Dashboard</a></li>
+          <li id="configMenu"><a href="#/config">Config</a></li>
+          
+          
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown "><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user" id="userName" style="font-size: 20px;"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Profile</a></li>
+              <li><a href="#">Settings</a></li>
+              <li><a href="/">Logout</a></li>
+            </ul>
           </li>
         </ul>
       </div>
     </nav>
+
     
     <div>
       <div class="content" id="content"></div>
@@ -62,8 +63,6 @@
     <script src="js/reqHandler.js"></script>
     <script src="js/services.js"></script>
     <script src="js/routes.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <!-- <script src="js/datatables.min.js"></script> -->
     <script src="js/jquery.dataTables.min.js"></script>
     <!-- <script src="js/dataTables.bootstrap.min.js"></script> -->
 
@@ -71,6 +70,7 @@
     <script type="text/javascript">          
       $( document ).ready(function() {
           document.title = "StateFarm - AutoUtil - "+$.session.get("userName");
+          $('#userName').html('&nbsp; ' + $.session.get("userName"));
       });
     </script>
   </body>
