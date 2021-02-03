@@ -2,11 +2,11 @@ var opts = {
 	            lines: 13 // The number of lines to draw
 	           , length: 13 // The length of each line
 	           , width: 3 // The line thickness
-	           , radius: 11 // The radius of the inner circle
+	           , radius: 20 // The radius of the inner circle
 	           , scale: 1 // Scales overall size of the spinner
 	           , corners: 1 // Corner roundness (0..1)
 	           , color: '#000' // #rgb or #rrggbb or array of colors
-	           , opacity: 0.25 // Opacity of the lines
+	           , opacity: 0.5 // Opacity of the lines
 	           , rotate: 0 // The rotation offset
 	           , direction: 1 // 1: clockwise, -1: counterclockwise
 	           , speed: 1 // Rounds per second
@@ -26,11 +26,11 @@ var ReqHandler = function() {
 		var target = document.getElementById('content');
 		var spinner = new Spinner(opts).spin(target);
 		var token = '';
-        /*if($.session.get('token')){token = $.session.get('token');}
+        if($.session.get('token')){token = $.session.get('token');}
 		$.blockUI({
 			message: null,
 			css: { backgroundColor: '#fff', color: '#fff'}
-		 });*/
+		 });
 		 /*$.blockUI({
 			message: null,
 			css: { backgroundColor: '#fff', color: '#fff'}
@@ -46,12 +46,12 @@ var ReqHandler = function() {
 			data: requestObj.data,
 			success: function(data) {
 				spinner.stop();
-				//$.unblockUI();
+				$.unblockUI();
 				callback(data);
 			},
 			error: function(data) {
 				spinner.stop();
-				//$.unblockUI();
+				$.unblockUI();
 				callback(data);
 			}
 		});
