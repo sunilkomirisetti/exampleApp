@@ -1,61 +1,216 @@
-
-<div class="container">
-	<div class="container-fluid">
-	   <div class="card shadow mb-4" >
-	     <div class="card-header py-3">
-	       <h6 class="m-0 font-weight-bold text-primary">Configurations
-	         <button class="btn btn-primary" style="margin-left: 75%;"data-toggle="modal" data-target="#modal-add-config" >Add Config</button>
-	       </h6>
-	     </div>
-	     <div class="card-body">
-	         <table id="configTable" class="table table-striped table-bordered" style="width:50%; height: 80%;"></table>
-	     </div>
-	   </div>
- </div>
+<div class="card shadow mb-4" style="overflow-x: auto; overflow-y: auto; height: 900px;">
+	<div class="card-header py-3">
+	    <h4 class="m-0 font-weight-bold text-primary">Configurations
+	        <button class="btn btn-primary" style="margin-left: 91%;"data-toggle="modal" data-target="#modal-add-config" >Add Config</button>
+	    </h4>
+	</div>
+	<div class="card-body">
+	    <table id="configTable" class="table table-striped table-bordered" ></table>
+	</div>
 </div>
 
- <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="modal-add-config"> 
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-         <div class="modal-header">
-           <h5 class="modal-title" id="exampleModalLongTitle">Add Config</h5>
-           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-             <span aria-hidden="true">&times;</span>
-           </button>
-         </div>
-         <div class="modal-body">
-          <div class="row">
-            <div class="col-md-6">
-              <div class="input-group">
-                <span class="input-group-prepend">
-                    <div class="input-group-text bg-transparent border-right-0"><i class="fa fa-user"></i></div>
-                </span>
-                <select class="form-control" id="agentName"></select>
-              </div>
-            </div>
-          </div>
-          <br/>
-          <div class="row">
-           <div class="col-md-12">
-               <div class="input-group">
-                   <span class="input-group-prepend">
-                       <div class="input-group-text bg-transparent border-right-0"><i class="fa fa-address-card"></i></div>
-                   </span>
-                   <select class="form-control" id="configStatus">
-                       <option selected value="">Status</option>
-                       <option value="Active">Active</option>
-                       <option value="Inactive">Inactive</option>
-                   </select>
-               </div>
-           </div>
-          </div>
-            
-          </div>
+ <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="modal-add-config" style="width: 99%;"> 
+  	<div class="modal-dialog modal-lg" style="width: 99%;">
+    	<div class="modal-content" style="width: 99%;">
+         	<div class="modal-header">
+           		<h5 class="modal-title" id="exampleModalLongTitle">Add Config</h5>
+           		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+             		<span aria-hidden="true">&times;</span>
+           		</button>
+         	</div>
+        	<div class="modal-body" style="width: 99%;">
+            	<div class="">
+              		<div class="input-group col-sm-12">
+                  		<span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                  		<input id="configName" type="text" class="form-control" name="configName" placeholder="Name">
+                	</div>
+                	<br/>
+                	<div class="input-group col-sm-12">
+                		<br/>
+                		<label>Page Objects</label><br/>
+                		<div class="">
+                		    <div class="col-md-12 column ">
+                		            <table class="table table-bordered table-hover" id="pageObjectsTable">
+                		                <thead>
+                		                    <tr >
+                		                        <th class="text-center">
+                		                            #
+                		                        </th>
+                		                        <th class="text-center">
+                		                            URL
+                		                        </th>
+                		                        <th class="text-center">
+                		                            Action
+                		                        </th>
+                		                        <th class="text-center">
+                		                            ActionEventId
+                		                        </th>
+                		                        <th class="text-center">
+                		                            ActionEventSelector
+                		                        </th>
+                		                        <th class="text-center">
+                		                            Capture Methods
+                		                        </th>
+                		                        <th class="text-center">
+                		                            Capture URLs
+                		                        </th>
+                		                        <th class="text-center">
+                		                            Form Data
+                		                        </th>
+                		                    </tr>
+                		                </thead>
+                		                <tbody>
+                		                    <tr id='addr0'>
+                		                        <td id='index0' class="form-control">
+                		                        1
+                		                        </td>
+                		                        <td>
+                		                        <input type="text" id='url0'  placeholder='http://wwww.statefarm.com' class="form-control"/>
+                		                        </td>
+                		                        <td>
+                		                        <select id="pageAction0" >
+                		                          <option value="Submit">Submit</option>
+                		                          <option value="Click">Click</option>
+                		                        </select>
+                		                        </td>
+                		                        <td>
+                		                        <input type="text" id='actionEventId0' placeholder='ActionEventId' class="form-control"/>
+                		                        </td>
+                		                        <td>
+                		                        <input type="text" id='actionEventSelector0' placeholder='ActionEventSelector' class="form-control"/>
+                		                        </td>
+                		                        <td>
+                		                          <input type="checkbox" id="captureMethodsGet0" value="GET">
+                		                            <label for="captureMethodsGet0"> Get</label><br>
+                		                            <input type="checkbox" id="captureMethodsPost0" value="POST">
+                		                            <label for="captureMethodsPost0">POST</label><br>
+                		                            <input type="checkbox" id="captureMethodsPut0" value="PUT">
+                		                            <label for="captureMethodsPut0"> PUT </label>
+                		                        </td>
+                		                        <td>
+                		                        <input type="text" id='captureURLs0' placeholder='write , separated values' class="form-control"/>
+                		                        </td>
+                		                        <td >
+                		                        	<div class='col-sm-12' id='formData0'>
+                		                        		<div class='col-sm-3'><input type='text' id='key00'  placeholder='key' class='form-control'></div>
+                		                        		<div class='col-sm-3'><input type='text' id='value00'  placeholder='value' class='form-control'></div>
+                		                        		<div class='col-sm-3'><select id='type00'><option value='input'>input</option><option value='dropdown'>dropdown</option><option value='checkbox'>checkbox</option></select></div>
+                		                        		<div class='col-sm-3'><a id='delete00' class='btn btn-danger' onclick='deleteInnerRow(0,0)' >-</a>&nbsp;<a id='add00'  onclick='addInnerRow(0)' class='add_inner_row btn btn-success'>+</a></div>
+                		                        	</div>
+                		                        </td>
+                		                    </tr>
+                		                    <tr id='addr1'></tr>
+                		                    <tr id='addr2'></tr>
+                		                    <tr id='addr3'></tr>
+                		                    <tr id='addr4'></tr>
+                		                    <tr id='addr5'></tr>
+                		                </tbody>
+                		            </table>
+                		    </div>
+                		    <a id="add_row" class="btn btn-success pull-left">Add Row</a><a id='delete_row' class="pull-right btn btn-danger">Delete Row</a>
+                		</div>
 
-         <div class="modal-footer">
-           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-           <button type="button" class="btn btn-primary" onclick="addConfig()">Create</button>
-         </div>
-       </div>
-  </div>
+                	</div>
+                	<br/>
+                	<div class="input-group col-sm-12">
+                		<select id="status" class="col-sm-8">
+                		  <option value="Active">Active</option>
+                		  <option value="Inactive">Inactive</option>
+                		</select>
+                	</div>
+
+            	</div>
+        	</div>
+
+	        <div class="modal-footer">
+	        	<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	           	<button type="button" class="btn btn-primary" onclick="addConfig()">Create</button>
+	        </div>
+	    </div>
+  	</div>
 </div>
+
+<script type="text/javascript">
+	var innerRowIndex = 1;
+	var rowIndex = 1;
+
+	$(document).ready(function() {
+		
+		
+		$("#add_row").click(function(){
+		$('#addr'+rowIndex).html("<td id='index"+rowIndex+"'>"+ (rowIndex+1) +"</td><td><input id='url"+rowIndex+"' type='text' placeholder='URL' class='form-control input-md'  /></td><td><select  id='pageAction"+rowIndex+"'><option value='Submit'>Submit</option><option value='Click'>Click</option></select></td><td><input  id='actionEventId"+rowIndex+"' type='text' placeholder='actionEventId'  class='form-control input-md'></td><td><input  id='actionEventSelector"+rowIndex+"' type='text' placeholder='actionEventSelector'  class='form-control input-md'></td><td><input  id='captureMethodsGet"+rowIndex+"' type='checkbox' value='GET'><label for='captureMethodsGet"+rowIndex+"'> Get</label><br/><input  id='captureMethodsPost"+rowIndex+"' type='checkbox' value='POST'><label for='captureMethodsGet"+rowIndex+"'> Post</label><br/><input  id='captureMethodsPut"+rowIndex+"' type='checkbox' value='PUT'><label for='captureMethodsGet"+rowIndex+"'> Put</label><br/></td><td><input id='captureURLs"+rowIndex+"' type='text' placeholder='write , separated values' class='form-control input-md'></td><td><div class='col-sm-12' id='formData"+rowIndex+"'><div class='col-sm-3'><input type='text' id='key00'  placeholder='key' class='form-control'></div><div class='col-sm-3'><input type='text' id='value00'  placeholder='value' class='form-control'></div><div class='col-sm-3'><select id='type00'><option value='input'>input</option><option value='dropdown'>dropdown</option><option value='checkbox'>checkbox</option></select></div><div class='col-sm-3'><a id='delete"+rowIndex+"0' class='btn btn-danger' onclick='deleteInnerRow("+rowIndex+",0)' >-</a>&nbsp;<a  id='add"+rowIndex+"0' onclick='addInnerRow("+rowIndex+")' class='add_inner_row btn btn-success'>+</a></div></div></td>");
+
+		$('#tab_logic').append('<tr id="addr'+(rowIndex+1)+'"></tr>');
+		rowIndex++; 
+		});
+		$("#delete_row").click(function(){
+		   if(rowIndex>1){
+		   $("#addr"+(rowIndex-1)).html('');
+		   rowIndex--;
+		   }
+		});
+		
+	});
+
+	function addInnerRow(rowIndex) {
+		var newRow = '<br/><br/><div class="col-sm-12"><div class="col-sm-3"><input type="text" id="key'+rowIndex+''+ innerRowIndex+'"  placeholder="key" class="form-control"/></div><div class="col-sm-3"><input type="text" id="value'+rowIndex+''+ innerRowIndex+'"  placeholder="value" class="form-control"/></div><div class="col-sm-3"><select id="type'+rowIndex+''+ innerRowIndex+'"><option value="input">input</option><option value="dropdown">dropdown</option><option value="checkbox">checkbox</option></select></div><div class="col-sm-3"><a id="delete'+rowIndex+''+ innerRowIndex+'" onclick="deleteInnerRow('+rowIndex+','+innerRowIndex+' )" class="btn btn-danger " >-</a>&nbsp;<a id="add'+rowIndex+''+ innerRowIndex+'" onclick="addInnerRow('+rowIndex+')" class="add_inner_row btn btn-success " >+</a></div></div>';
+		var newInput = $(newRow);
+		$('#formData' + rowIndex).after(newInput);
+		innerRowIndex = innerRowIndex + 1;
+	}
+
+	function deleteInnerRow(outerRowIndex, innerRowIndex) {
+		alert('outerRowIndex :: ' + outerRowIndex + ' ,innerRowIndex :: '+ innerRowIndex);
+		if (0 == outerRowIndex && 0 == innerRowIndex) {
+			alert('This can not be deleted');
+		} else {
+			document.getElementById("key"+outerRowIndex+""+innerRowIndex).remove();
+			document.getElementById("value"+outerRowIndex+""+innerRowIndex).remove();
+			document.getElementById("type"+outerRowIndex+""+innerRowIndex).remove();
+			document.getElementById("delete"+outerRowIndex+""+innerRowIndex).remove();
+			document.getElementById("add"+outerRowIndex+""+innerRowIndex).remove();
+			innerRowIndex = innerRowIndex - 1;
+		}
+	}
+
+	function addConfig() {
+		let configObj = {
+		    "configName": $('#configName').val(),
+		    "createdBy": $.session.get('userId'),
+		    "status": $('#status').val(),
+		    "pageObjects": []
+		};
+		let pageObjects = [];
+		alert('no.of rows :: ' + rowIndex);
+		
+		for(i=0;i<rowIndex;i++) {
+			let captureMethods = [];
+			if ($("#captureMethodsGet" + i).is(":checked")) {
+				captureMethods.push('GET');
+			}
+			if ($("#captureMethodsPost" + i).is(":checked")) {
+				captureMethods.push('POST');
+			}
+			if ($("#captureMethodsPut" + i).is(":checked")) {
+				captureMethods.push('PUT');
+			}
+			let pageObj = {
+                "pageIndex": $('#index' + i).val(),
+                "pageURL": $('#url' + i).val(),
+                "pageAction": $('#pageAction' + i).val(),
+                "actionEventId": $('#actionEventId' + i).val(),
+                "captureMethods": captureMethods,
+                "captureURLs": $('#captureURLs' + i).val().split(','),
+                "formData": []
+            };
+            alert('no.of rows :: ' + innerRowIndex);
+            pageObjects.push(pageObj);
+		}
+		configObj.pageObjects = pageObjects;
+		alert(JSON.stringify(configObj, null, 2));
+
+	}
+
+
+</script>
+
