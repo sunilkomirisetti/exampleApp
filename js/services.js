@@ -33,7 +33,7 @@ function login() {
 }
 
 function callConfigAPI(){
-    reqHandler.get({url:"/ui/query/config?createdBy="+$.session.get('userId')}, function(resp){
+    reqHandler.get({url:"/query/config?createdBy="+$.session.get('userId')}, function(resp){
         if(resp.status == "Success"){
             console.log(resp.result);
             loadAgentVehicleGrid(resp.result);
@@ -50,14 +50,25 @@ function loadAgentVehicleGrid(result){
          var dataObj = [];
          dataObj.push(obj.configId);
          dataObj.push(obj.configName);
-         dataObj.push(JSON.stringify(obj.pageObjects));
+         //dataObj.push(JSON.stringify(obj.pageObjects));
+         console.log(JSON.stringify(obj.pageObjects));
+         let innerTable = '<table id="exampleTable"><thead><tr><th>Index</th><th>URL</th><th>Action</th><th>Capture Methods</th><th>Capture URLs</th><th>formData</th></tr></thead><tbody>';
+
+         let pageObjects = obj.pageObjects;
+         let lastIndex = pageObjects.length;
+         if (lastIndex) {
+         	pageObjects.forEach(function(elem) {
+         		innerTable = innerTable + '<tr><td>' + elem.pageIndex + '</td><td>' + elem.pageURL + '</td><td>' + elem.pageAction + '</td><td>' + JSON.stringify(elem.captureMethods) + '</td><td>' + JSON.stringify(elem.captureURLs) + '</td><td>' + JSON.stringify(elem.formData) + '</td></tr>';
+         		lastIndex = lastIndex - 1;
+         		if (lastIndex <= 0) {
+         			innerTable = innerTable + '</tbody></table>';
+         			dataObj.push(innerTable);
+         		}
+         	});
+         }
+         
          dataObj.push(obj.status);
-         //tempPolicyObj.push('<input type="checkbox" checked data-toggle="toggle" data-on="Ready" data-off="Not Ready" data-onstyle="success" data-offstyle="danger">');
-         //tempVehicleObj.push("<button class='btn btn-primary' data-toggle='modal' data-target='.update-policy-vehicle' onclick='getVehicleInfoyByID("+JSON.stringify(obj)+")'><i class='fa fa-edit' aria-hidden='true'></i> &nbsp;&nbsp;Edit</button>");
-
-         //dataObj.push("<button class='btn btn-primary' data-toggle='modal' data-target='.update-config' onclick='getConfig("+JSON.stringify(obj)+")'><i class='fa fa-edit' aria-hidden='true'></i> &nbsp;&nbsp;Edit</button><a class='btn btn-primary' href='/ui/filedownload/'"+obj.fileId+"''><i class="fa fa-download" aria-hidden="true"></i></a>&nbsp;&nbsp;");
-
-                  dataObj.push('<a class="btn btn-primary" href="/testReport/'+obj.configId+'"><i class="fa fa-download" aria-hidden="true"></i></a>&nbsp;&nbsp;');
+         dataObj.push(' <a class="btn btn-primary" href="/testReport/'+obj.configId+'"><i class="fa fa-download" aria-hidden="true"></i></a>&nbsp;&nbsp;');
 
          dataList.push(dataObj);
      });
