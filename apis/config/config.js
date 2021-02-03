@@ -18,7 +18,7 @@ module.exports = function(app) {
 			res.json(e);
 		}
 	});
-	app.get('/ui/query/config', function(req, res) {
+	app.get('/query/config', function(req, res) {
 		try {
 			getList(req.query, function(response) {
 				res.json(response);
